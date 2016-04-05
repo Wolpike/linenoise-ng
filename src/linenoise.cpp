@@ -89,6 +89,7 @@
 #include <conio.h>
 #include <windows.h>
 #include <io.h>
+#ifdef _MSC_VER
 #if _MSC_VER < 1900
 #define snprintf _snprintf  // Microsoft headers use underscores in some names
 #endif
@@ -96,7 +97,12 @@
 #define strdup _strdup
 #define isatty _isatty
 #define write _write
+#endif
 #define STDIN_FILENO 0
+
+#if defined(__MINGW32__) || defined(__MINGW64__)
+#include <stdio.h>
+#endif
 
 #else /* _WIN32 */
 
@@ -924,8 +930,10 @@ static struct termios orig_termios; /* in order to restore at exit */
 
 static KillRing killRing;
 
+#ifndef WIN32
 static int rawmode = 0; /* for atexit() function to check if restore is needed*/
 static int atexit_registered = 0; /* register atexit just 1 time */
+#endif
 static int historyMaxLen = LINENOISE_DEFAULT_HISTORY_MAX_LEN;
 static int historyLen = 0;
 static int historyIndex = 0;
@@ -938,7 +946,9 @@ static char8_t** history = NULL;
 static int historyPreviousIndex = -2;
 static bool historyRecallMostRecent = false;
 
+#ifndef WIN32
 static void linenoiseAtExit(void);
+#endif
 
 static bool isUnsupportedTerm(void) {
   char* term = getenv("TERM");
@@ -1025,8 +1035,10 @@ static void disableRawMode(void) {
 #endif
 }
 
+#ifndef WIN32
 // At exit we'll try to fix the terminal to the initial conditions
 static void linenoiseAtExit(void) { disableRawMode(); }
+#endif
 
 static int getScreenColumns(void) {
   int cols;
