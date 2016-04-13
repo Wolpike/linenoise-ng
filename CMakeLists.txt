@@ -1,10 +1,8 @@
 # -*- mode: CMAKE; -*-
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.4)
 
 project(linenoise)
-
-set(CMAKE_BINARY_DIR "${CMAKE_SOURCE_DIR}/build")
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE string "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
@@ -118,3 +116,11 @@ set(CPACK_STRIP_FILES "ON")
 
 set(CPACK_PACKAGE_NAME "linenoise")
 set(CPACK_DEBIAN_PACKAGE_SECTION "utilities")
+
+# Wolpike build stuff
+GET_DIRECTORY_PROPERTY( HAS_PARENT PARENT_DIRECTORY )
+IF( HAS_PARENT )
+  SET( LINENOISE_INCLUDES 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include PARENT_SCOPE )
+  SET( LINENOISE_LIBS linenoise PARENT_SCOPE )
+ENDIF()
