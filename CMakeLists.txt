@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.4)
 
 project(linenoise)
 
+SET( CMAKE_C_STANDARD 11 )
+
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE string "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif()
