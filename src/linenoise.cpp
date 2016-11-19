@@ -439,7 +439,7 @@ class Utf32String {
     copyString8to32(_data, len + 1, _length, src);
   }
 
-  explicit Utf32String(const char8_t* src) {
+  explicit Utf32String(const char8_t* src) : _length(0) {
     size_t len = strlen(reinterpret_cast<const char*>(src));
     _data = new char32_t[len + 1];
     copyString8to32(_data, len + 1, _length, src);
