@@ -7,13 +7,13 @@ project(linenoise)
 SET( CMAKE_C_STANDARD 11 )
 
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release CACHE string "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif()
 
 message(STATUS "Build mode: ${CMAKE_BUILD_TYPE}")
 
 # INFO
-set(LINENOISE_VERSION "1.0.0" CACHE path "Linenoise version")
+set(LINENOISE_VERSION "1.0.0" CACHE STRING "Linenoise version")
 set(LINENOISE_DISPLAY_NAME "Linenoise-NG")
 set(LINENOISE_URL_INFO_ABOUT "https://github.com/arangodb/linenoise-ng")
 set(LINENOISE_CONTACT "hackers@arangodb.org")
