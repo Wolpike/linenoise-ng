@@ -1084,6 +1084,7 @@ static int getScreenRows(void) {
 
 static void setDisplayAttribute(bool enhancedDisplay, bool error) {
 #ifdef _WIN32
+  (void)error;
   if (enhancedDisplay) {
     CONSOLE_SCREEN_BUFFER_INFO inf;
     GetConsoleScreenBufferInfo(console_out, &inf);

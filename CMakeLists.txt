@@ -1,5 +1,3 @@
-# -*- mode: CMAKE; -*-
-
 CMAKE_MINIMUM_REQUIRED( VERSION 3.7 )
 PROJECT( linenoise )
 
@@ -14,6 +12,11 @@ ADD_LIBRARY( linenoise STATIC
   src/linenoise.cpp
   src/wcwidth.cpp
 )
+IF( CMAKE_COMPILER_IS_GNUCC )
+  TARGET_COMPILE_OPTIONS( linenoise PRIVATE 
+    -Wno-implicit-fallthrough
+  )
+ENDIF()
 TARGET_INCLUDE_DIRECTORIES( linenoise PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/include 
 )
